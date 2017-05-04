@@ -1,6 +1,4 @@
-///////////////////////////
-/* Some global variables */
-///////////////////////////
+
 function createVerovioToolkit() {
   var vrvToolkit = new verovio.toolkit();
 
