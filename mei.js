@@ -117,9 +117,10 @@ function createMeasure(chords, mIdx) {
 function createMeiXml(chords) {
   var cleanedChords = [];
   chords.forEach(function(chord) {
-    if (chord && chord[0] != ';') {
-      cleanedChords.push(chord);
+    if (chord && chord[0] == ';') {
+      return ;
     }
+    cleanedChords.push(chord);
   });
   var measures = createMeasures(cleanedChords);
   return x2js.json2xml_str(createMei(measures));
