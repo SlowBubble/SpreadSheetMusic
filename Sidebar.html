@@ -56,12 +56,68 @@
     <div id="svg_output"/>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="https://www.verovio.org/javascript/develop/verovio-toolkit.js" type="text/javascript" ></script>
     <script src='https://cdn.rawgit.com/abdmob/x2js/master/xml2json.js' type="text/javascript"></script>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" type="text/javascript" ></script>
     <script src="https://slowbubble.github.io/SpreadSheetMusic/verovio-toolkit.js" type="text/javascript" ></script>
     <script src='https://slowbubble.github.io/SpreadSheetMusic/mei.js'></script>
     <script src='https://slowbubble.github.io/SpreadSheetMusic/verovio.js'></script>
-    <script src='SidebarJs.html'></script>
+
+<script>
+/**
+ * On document load, assign click handlers to each button and try to load the
+ * user's origin and destination language preferences if previously set.
+ */
+$(function() {
+  $('#run-translation').click(runTranslation);
+  $('#insert-text').click(insertText);
+  google.script.run.withFailureHandler(showError)
+});
+
+/**
+ * Runs a server-side function to translate the user-selected text and update
+ * the sidebar UI with the resulting translation.
+ */
+function runTranslation() {
+  
+}
+
+/**
+ * Runs a server-side function to insert the translated text into the document
+ * at the user's cursor or selection.
+ */
+function insertText() {
+  this.disabled = true;
+  $('#error').remove();
+  google.script.run
+      .withSuccessHandler(
+        function(musicJson, element) {
+          element.disabled = false;
+          var chords = musicJson.Content
+          var meiXml = createMeiXml(chords);
+          var vrvToolkit = createVerovioToolkit(30);
+          var svg = vrvToolkit.renderData(meiXml);
+          $("#svg_output").html(svg);
+        })
+      .withFailureHandler(
+        function(msg, element) {
+          showError(msg, $('#button-bar'));
+          element.disabled = false;
+        })
+      .withUserObject(this)
+      .getSheetMusicJson();
+}
+
+/**
+ * Inserts a div that contains an error message after a given element.
+ *
+ * @param msg The error message to display.
+ * @param element The element after which to display the error.
+ */
+function showError(msg, element) {
+  var div = $('<div id="error" class="error">' + msg + '</div>');
+  $(element).after(div);
+}
+
+</script>
   </body>
 </html>

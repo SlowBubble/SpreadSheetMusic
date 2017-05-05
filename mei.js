@@ -115,6 +115,12 @@ function createMeasure(chords, mIdx) {
 }
 
 function createMeiXml(chords) {
+  var cleanedChords = [];
+  chords.forEach(function(chord) {
+    if (chord && chord[0] != ';') {
+      cleanedChords.push(chord);
+    }
+  });
   var measures = createMeasures(chords);
   return x2js.json2xml_str(createMei(measures));
 }

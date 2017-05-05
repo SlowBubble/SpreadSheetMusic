@@ -1,8 +1,7 @@
 
-function createVerovioToolkit() {
+function createVerovioToolkit(zoom) {
   var vrvToolkit = new verovio.toolkit();
-
-  var zoom = 80;
+  var zoom = zoom || 80;
   var pageWidth = $(window).width() * 100 / zoom ;
   var options = {
     pageWidth: pageWidth,

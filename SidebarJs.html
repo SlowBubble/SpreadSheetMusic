@@ -28,7 +28,7 @@ function insertText() {
       .withSuccessHandler(
         function(musicJson, element) {
           element.disabled = false;
-          $('svg_output').text(musicJson);
+          $('#svg_output').text(JSON.stringify(musicJson));
         })
       .withFailureHandler(
         function(msg, element) {
