@@ -42,14 +42,9 @@
   <body>
     <div class="sidebar branding-below">
       <form>
-        <div>
-          <label for="music"><b>Music</b></label>
-          <div id='music'>
-        </div>
-
        <div class="block" id="button-bar">
-          <button class="blue" id="run-translation">Translate</button>
-          <button id="insert-text">Insert</button>
+          <button class="blue" id="run-translation">Generate Sheet Music</button>
+          <!--<button id="insert-text">Insert</button>-->
         </div>
       </form>
     </div>
@@ -69,7 +64,6 @@
  */
 $(function() {
   $('#run-translation').click(runTranslation);
-  $('#insert-text').click(insertText);
   google.script.run.withFailureHandler(showError)
 });
 
@@ -77,15 +71,11 @@ $(function() {
  * Runs a server-side function to translate the user-selected text and update
  * the sidebar UI with the resulting translation.
  */
-function runTranslation() {
-  
-}
-
 /**
  * Runs a server-side function to insert the translated text into the document
  * at the user's cursor or selection.
  */
-function insertText() {
+function runTranslation() {
   this.disabled = true;
   $('#error').remove();
   google.script.run
