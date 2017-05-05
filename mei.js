@@ -121,6 +121,6 @@ function createMeiXml(chords) {
       cleanedChords.push(chord);
     }
   });
-  var measures = createMeasures(chords);
+  var measures = createMeasures(cleanedChords);
   return x2js.json2xml_str(createMei(measures));
 }
